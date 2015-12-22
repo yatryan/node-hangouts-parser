@@ -4,8 +4,10 @@
   "description": "A Node.js parser for Hangouts",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^3.1.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "promise-mysql": "^1.1.1",
     "prompt": "^0.2.14"
   },
   "devDependencies": {},
