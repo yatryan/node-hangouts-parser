@@ -1,0 +1,22 @@
+{
+  "name": "node-hangouts-parser",
+  "description": "A Node.js parser for Hangouts",
+  "main": "index.js",
+  "authors": [
+    "Taylor Ryan"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/yatryan/node-hangouts-parser",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Chart.js": "~1.0.2"
+  }
+}
