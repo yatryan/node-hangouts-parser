@@ -30,7 +30,7 @@ program
   .option('-u, --username <username>', 'Database username')
   .option('-p, --password <password>', 'Database password')
   .option('-h, --host [host]', 'Database host [localhost]', 'localhost')
-  .option('--mysql [database]', 'Send to MySQL database', 'hangouts_dev')
+  .option('--mysql [database]', 'Send to MySQL database')
   .option('-o, --output [file]', 'Output to file', 'output.json')
   .parse(process.argv);
 
@@ -44,7 +44,7 @@ var dbLogin = {};
 if (program.mysql) {
   dbLogin.user = program.username || '';
   dbLogin.password = program.password || '';
-  dbLogin.database = program.mysql;
+  dbLogin.database = (typeof program.mysql) === 'string' ? program.mysql : 'hangouts_dev';
   dbLogin.host = program.host;
 
   if (dbLogin.user === '' || dbLogin.password === '') {
@@ -69,8 +69,9 @@ if (program.mysql) {
 }
 else {
   // Output to file
-  fs.writeFileSync(program.output,conversations);
+  fs.writeFileSync(program.output,JSON.stringify(conversations));
   Logger.info('Wrote conversations to '+program.output);
+  process.exit(0);
 }
 
 function callback() {
