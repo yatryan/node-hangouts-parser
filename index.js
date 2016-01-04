@@ -69,7 +69,7 @@ if (program.mysql) {
 }
 else {
   // Output to file
-  fs.writeFileSync(program.output,JSON.stringify(conversations));
+  fs.writeFileSync(program.output,JSON.stringify(conversations, null, 2));
   Logger.info('Wrote conversations to '+program.output);
   process.exit(0);
 }
