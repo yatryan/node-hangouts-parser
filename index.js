@@ -54,8 +54,11 @@ if (program.graph) {
      var compiled = Graph.compile(messages);
      fs.writeFileSync('output.json',JSON.stringify(compiled['_months'], null, 2));
      Logger.info('Wrote compiled to output.json');
-     process.exit(0);
-  })
+
+     return Graph.generateLineGraph(compiled, 'month');
+  }).then(function() {
+    process.exit(0);
+  });
 }
 else if (program.mysql) {
   dbLogin.user = program.username || '';
