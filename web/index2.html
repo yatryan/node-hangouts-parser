@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Charts</title>
+		<link rel="stylesheet" href="css/main2.css" type="text/css">
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/Chart.js/Chart.js"></script>
+	</head>
+	<body>
+
+    <canvas id="chart1" width="1300" height="600"></canvas>
+    <canvas id="chart2" width="1300" height="600"></canvas>
+    <canvas id="chart3" width="600" height="600"></canvas>
+
+	<script>
+  var dynamicColors = function() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return ["rgba(" + r + "," + g + "," + b + ",0.2)","rgba(" + r + "," + g + "," + b + ",1)"];
+  }
+	window.onload = function(){
+		$.get( "json/months.json", function( data ) {
+		  makeLineChart('chart1',data);
+		}, "json" );
+    $.get( "json/years.json", function( data ) {
+		  makeLineChart('chart2',data);
+		}, "json" );
+		$.get( "json/pie.json", function( data ) {
+		  makePieChart('chart3',data);
+		}, "json" );
+	};
+
+	function makeLineChart(name, data) {
+    data.labels = data._labels;
+
+    var lineData = {
+      labels: data._labels,
+      datasets: []
+    };
+
+    for (var i = 0; i < data._data.length; i++) {
+      var setColor = dynamicColors();
+      var set = {
+        label: data._people[i],
+        data: data._data[i],
+        fillColor: setColor[0],
+        strokeColor: setColor[1],
+        pointColor: setColor[1],
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: setColor[1],
+      }
+      lineData.datasets.push(set);
+    }
+
+    var ctx = document.getElementById(name).getContext("2d");
+    var myLineChart = new Chart(ctx).Line(lineData, {
+      showTooltips: false
+    });
+
+    // document.getElementById('chart1-legend').innerHTML = myLineChart.generateLegend();
+	}
+
+	function makePieChart(name, data) {
+		data.series = data._data;
+		data.labels = data._people;
+    var pieData = [];
+    for (var i = 0; i < data._data.length; i++) {
+      var set = {
+        value: data._data[i],
+        label: data._people[i],
+        color: dynamicColors()[1]
+      }
+      pieData.push(set);
+    }
+
+    var ctx = document.getElementById(name).getContext("2d");
+		var myPieChart = new Chart(ctx).Pie(pieData,{});
+	}
+	</script>
+	</body>
+</html>

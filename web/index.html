@@ -18,6 +18,10 @@
 			<div class="ct-chart2 ct-perfect-fourth">
 			</div>
 		</div>
+		<div class="chart" style="width: 70%">
+			<div class="ct-chart3 ct-perfect-fourth">
+			</div>
+		</div>
 	<script>
 	window.onload = function(){
 		$.get( "json/months.json", function( data ) {
@@ -25,6 +29,9 @@
 		}, "json" );
 		$.get( "json/years.json", function( data ) {
 		  makeLineChart('.ct-chart2',data);
+		}, "json" );
+		$.get( "json/pie.json", function( data ) {
+		  makePieChart('.ct-chart3',data);
 		}, "json" );
 	};
 
@@ -58,6 +65,20 @@
 		//     });
 		//   }
 		// });
+	}
+
+	function makePieChart(name, data) {
+		data.series = data._data;
+		data.labels = data._people;
+
+		var sum = function(a, b) { return a + b };
+
+		var chart = new Chartist.Pie(name, data, {
+	    labelDirection: 'explode',
+	    labelInterpolationFnc: function(value) {
+	      return value;
+	    }
+		});
 	}
 	</script>
 	</body>

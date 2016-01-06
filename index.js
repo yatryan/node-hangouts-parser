@@ -57,6 +57,7 @@ if (program.graph) {
 
     Graph.generateLineGraph(compiled, 'month');
     Graph.generateLineGraph(compiled);
+    Graph.generatePieGraph(compiled);
 
     return 1;
   }).then(function() {
