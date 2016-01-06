@@ -1,0 +1,39 @@
+@import '../bower_components/chartist/dist/scss/chartist.scss';
+
+.ct-legend {
+  position: relative;
+  z-index: 10;
+
+  li {
+    margin-bottom: 3px;
+    padding-left: 23px;
+    position: relative;
+
+    &:before {
+      border: 3px solid transparent;
+      border-radius: 2px;
+      content: '';
+      height: 12px;
+      left: 0;
+      position: absolute;
+      width: 12px;
+    }
+  }
+
+  li.inactive:before {
+    background: transparent;
+  }
+
+  &.ct-legend-inside {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  @for $i from 0 to length($ct-series-colors) {
+    .ct-series-#{$i}:before {
+      background-color: nth($ct-series-colors, $i + 1);
+      border-color: nth($ct-series-colors, $i + 1);
+    }
+  }
+}

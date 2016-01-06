@@ -1,5 +1,20 @@
 var express = require('express');
 var app = express();
+sassMiddleware = require('node-sass-middleware');
+
+
+var srcPath = __dirname + '/web/sass';
+var destPath = __dirname + '/web/css';
+
+// adding the sass middleware
+app.use('/css',
+  sassMiddleware({
+    src: srcPath,
+    dest: destPath,
+    debug: true,
+    outputStyle: 'expanded'
+  })
+);
 
 app.use(express.static('web'));
 

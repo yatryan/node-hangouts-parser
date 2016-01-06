@@ -51,11 +51,14 @@ if (program.graph) {
 
   mysql.loadMessages(dbLogin)
   .then(function(messages) {
-     var compiled = Graph.compile(messages);
-     fs.writeFileSync('output.json',JSON.stringify(compiled['_months'], null, 2));
-     Logger.info('Wrote compiled to output.json');
+    var compiled = Graph.compile(messages);
+    fs.writeFileSync('output.json',JSON.stringify(compiled['_months'], null, 2));
+    Logger.info('Wrote compiled to output.json');
 
-     return Graph.generateLineGraph(compiled, 'month');
+    Graph.generateLineGraph(compiled, 'month');
+    Graph.generateLineGraph(compiled);
+
+    return 1;
   }).then(function() {
     process.exit(0);
   });
