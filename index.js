@@ -59,6 +59,7 @@ if (program.graph) {
     // Graph.generateLineGraph(compiled, 'month');
     Graph.generateC3LineGraph(compiled, 'month');
     // Graph.generateLineGraph(compiled);
+    Graph.generateC3LineGraph(compiled);
     // Graph.generatePieGraph(compiled);
 
     return 1;
