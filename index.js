@@ -52,12 +52,14 @@ if (program.graph) {
   mysql.loadMessages(dbLogin)
   .then(function(messages) {
     var compiled = Graph.compile(messages);
-    fs.writeFileSync('output.json',JSON.stringify(compiled['_months'], null, 2));
+    fs.writeFileSync('output.json',JSON.stringify(compiled, null, 2));
+    fs.writeFileSync('web/json/output.json',JSON.stringify(compiled, null, 2));
     Logger.info('Wrote compiled to output.json');
 
-    Graph.generateLineGraph(compiled, 'month');
-    Graph.generateLineGraph(compiled);
-    Graph.generatePieGraph(compiled);
+    // Graph.generateLineGraph(compiled, 'month');
+    Graph.generateC3LineGraph(compiled, 'month');
+    // Graph.generateLineGraph(compiled);
+    // Graph.generatePieGraph(compiled);
 
     return 1;
   }).then(function() {
