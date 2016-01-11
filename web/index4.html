@@ -10,34 +10,26 @@
 	</head>
 	<body>
 
-    <div id="chart" ></div>
+    <div id="years" ></div>
+		<br>
+		<div id="months" ></div>
+		<br>
+		<div id="pie1" ></div>
 
 <script>
 	window.onload = function(){
-		var chart = c3.generate({
-			bindto: '#chart',
+		var years = c3.generate({
+			tooltip: {
+				grouped: false // Default true
+			},
+			bindto: '#years',
 			data: {
-				// x: 'x',
-        // columns: [
-        //     ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-				// 		['data1', 30, 200, 100, 400, 150, 250],
-				// 	]
-				// json: [
-				// 	{id: 1, name: "000", messages: [], months: [], years:[]},
-				// 	{id: 2, name: "100", messages: [], months: [], years:[]},
-				// 	{id: 3, name: "300", messages: [], months: [], years:[]},
-				// 	{id: 4, name: "400", messages: [], months: [], years:[]},
-				// ],
-				// url: 'json/years-c3.json',
+				x: 'x',
+				url: 'json/years-c3.json',
+				mimeType: 'json'
 
 			},
 			axis: {
-				// x: {
-				//   type: 'timeseries',
-				//   tick: {
-				//     format: '%Y'
-				//   }
-				// },
 				y: {
 					label: {
 						text: 'Messages Sent',
@@ -46,14 +38,49 @@
 				}
 			}
 		});
+		var months = c3.generate({
+			bindto: '#months',
+			data: {
+				type: 'area-spline',
+				x: 'x',
+				xFormat: '%m %Y', // 'xFormat' can be used as custom format of 'x'
+				url: 'json/months-c3.json',
+				mimeType: 'json'
 
-		// setTimeout(function () {
-		// 	chart.load({
-	  //       columns: [
-	  //           ['data3', 400, 500, 450, 700, 600, 500]
-	  //       ]
-	  //   });
-		// }, 1000);
+			},
+			zoom: {
+				enabled: true
+			},
+			tooltip: {
+				grouped: false // Default true
+			},
+			axis: {
+				x: {
+				  type: 'timeseries',
+				  tick: {
+				    format: '%m %Y'
+				  }
+				},
+				y: {
+					label: {
+						text: 'Messages Sent',
+						position: 'outer-middle'
+					}
+				}
+			}
+		});
+		var pie1 = c3.generate({
+			tooltip: {
+				grouped: false // Default true
+			},
+			bindto: '#pie1',
+			data: {
+				x: 'x',
+				url: 'json/years-c3.json',
+				mimeType: 'json',
+				type: 'pie'
+			}
+		});
 	};
 	</script>
 	</body>
