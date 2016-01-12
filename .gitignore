@@ -36,3 +36,5 @@ Hangouts.json
 output.json
 web/bower_components
 web/json
+*.sqlite3
+*.sqlite3-journal

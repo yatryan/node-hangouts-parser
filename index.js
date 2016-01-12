@@ -9,6 +9,7 @@ var Promise = require('bluebird');
 var Logger = require('./lib/logger');
 var Hangouts = require('./lib/hangouts');
 var mysql = require('./lib/mysql');
+var sqlite = require('./lib/sqlite');
 var Graph = require('./lib/graph');
 var hangoutParser = Hangouts.parser;
 
@@ -32,6 +33,7 @@ program
   .option('-p, --password <password>', 'Database password')
   .option('-h, --host [host]', 'Database host [localhost]', 'localhost')
   .option('--mysql [database]', 'Send to MySQL database')
+  .option('--sqlite [database]', 'Sqlite database','hangouts')
   .option('-g, --graph', 'Graph Mode')
   .option('-o, --output [file]', 'Output to file', 'output.json')
   .parse(process.argv);
@@ -42,6 +44,29 @@ if (program.args.length != 1) {
 
 var conversations = hangoutParser.parse(program.args[0]);
 var dbLogin = {};
+
+if (program.sqlite) {
+  sqlite.sendConversations(conversations);
+
+  sqlite.loadMessages()
+  .then(function(messages) {
+    var compiled = Graph.compile(messages);
+    fs.writeFileSync('output.json',JSON.stringify(compiled, null, 2));
+    fs.writeFileSync('web/json/output.json',JSON.stringify(compiled, null, 2));
+    Logger.info('Wrote compiled to output.json');
+
+    // Graph.generateLineGraph(compiled, 'month');
+    Graph.generateC3LineGraph(compiled, 'month');
+    // Graph.generateLineGraph(compiled);
+    Graph.generateC3LineGraph(compiled);
+    // Graph.generatePieGraph(compiled);
+
+    return 1;
+  }).then(function() {
+    process.exit(0);
+  });
+  return;
+}
 
 if (program.graph) {
   dbLogin.user = program.username || '';
