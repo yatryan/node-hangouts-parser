@@ -10,15 +10,12 @@
     "express": "^4.13.3",
     "moment": "^2.11.1",
     "node-sass-middleware": "^0.9.7",
-    "promise-mysql": "^1.1.1",
-    "prompt": "^0.2.14",
     "sqlite3": "^3.1.1"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node ./index.js --mysql -u hangouts_dev -p VWpEt2vNx2f4pDTS -h yatryan.com Hangouts.json",
-    "graph": "node ./index.js --mysql -g -u hangouts_dev -p VWpEt2vNx2f4pDTS -h yatryan.com Hangouts.json",
-    "serve": "httpster -d web",
+    "start": "node ./index.js Hangouts.json",
+    "serve": "node ./serve.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
