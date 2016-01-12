@@ -25,7 +25,7 @@
 			bindto: '#years',
 			data: {
 				x: 'x',
-				url: 'json/years-c3.json',
+				url: 'api/years',
 				mimeType: 'json'
 
 			},
@@ -44,12 +44,11 @@
 				type: 'area-spline',
 				x: 'x',
 				xFormat: '%m %Y', // 'xFormat' can be used as custom format of 'x'
-				url: 'json/months-c3.json',
+				url: 'api/months',
 				mimeType: 'json'
-
 			},
-			zoom: {
-				enabled: true
+			subchart: {
+				show: true
 			},
 			tooltip: {
 				grouped: false // Default true
@@ -58,6 +57,7 @@
 				x: {
 				  type: 'timeseries',
 				  tick: {
+						culling: false,
 				    format: '%m %Y'
 				  }
 				},
@@ -76,7 +76,7 @@
 			bindto: '#pie1',
 			data: {
 				x: 'x',
-				url: 'json/years-c3.json',
+				url: 'api/years',
 				mimeType: 'json',
 				type: 'pie'
 			}

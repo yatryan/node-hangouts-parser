@@ -11,19 +11,6 @@ var sqlite = require('./lib/sqlite');
 var Graph = require('./lib/graph');
 var hangoutParser = Hangouts.parser;
 
-var promptSchema = {
-  properties: {
-    username: {
-      required: true
-    },
-    password: {
-      hidden: true,
-      required: true
-    }
-  }
-};
-
-
 program
   .version(config.version)
   .usage('[options] <file>')
@@ -43,14 +30,7 @@ sqlite.loadMessages()
 .then(function(messages) {
   var compiled = Graph.compile(messages);
   fs.writeFileSync(program.output,JSON.stringify(compiled, null, 2));
-  fs.writeFileSync('web/json/output.json',JSON.stringify(compiled, null, 2));
   Logger.info('Wrote compiled to '+program.output);
-
-  // Graph.generateLineGraph(compiled, 'month');
-  Graph.generateC3LineGraph(compiled, 'month');
-  // Graph.generateLineGraph(compiled);
-  Graph.generateC3LineGraph(compiled);
-  // Graph.generatePieGraph(compiled);
 
   return 1;
 });
