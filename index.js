@@ -37,12 +37,16 @@ if (program.args.length != 1) {
 
 var conversations = hangoutParser.parse(program.args[0]);
 
-sqlite.sendConversations(conversations);
-
-sqlite.loadMessages()
+sqlite.sendConversations(conversations)
+.then(function() {
+  return sqlite.loadMessages();
+})
 .then(function(messages) {
   var compiled = Graph.compile(messages);
   fs.writeFileSync(program.output,JSON.stringify(compiled, null, 2));
+  if (!fs.existsSync('web/json')){
+    fs.mkdirSync('web/json');
+  }
   fs.writeFileSync('web/json/output.json',JSON.stringify(compiled, null, 2));
   Logger.info('Wrote compiled to '+program.output);
 

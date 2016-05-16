@@ -4,13 +4,13 @@
   "description": "A Node.js parser for Hangouts",
   "main": "index.js",
   "dependencies": {
-    "bluebird": "^3.1.1",
+    "bluebird": "^3.3.5",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
-    "express": "^4.13.3",
-    "moment": "^2.11.1",
-    "node-sass-middleware": "^0.9.7",
-    "sqlite3": "^3.1.1"
+    "express": "^4.13.4",
+    "moment": "^2.13.0",
+    "node-sass-middleware": "^0.9.8",
+    "sqlite3": "^3.1.4"
   },
   "devDependencies": {},
   "scripts": {
