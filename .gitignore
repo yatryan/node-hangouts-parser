@@ -32,9 +32,12 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+
 Hangouts.json
 output.json
-web/bower_components
-web/json
+lib/api/bower_components
+lib/api/json
+lib/api/css
 *.sqlite3
 *.sqlite3-journal

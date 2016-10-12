@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<title>Charts</title>
-		<link rel="stylesheet" href="css/main3.css" type="text/css">
+		<link rel="stylesheet" href="css/main.css" type="text/css">
     <link rel="stylesheet" href="bower_components/c3/c3.css" type="text/css">
-		<script src="bower_components/jquery/dist/jquery.js"></script>
-		<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="bower_components/c3/c3.js" charset="utf-8"></script>
+		<script src="bower_components/d3/d3.js" charset="utf-8"></script>
+		<script src="bower_components/c3/c3.js" charset="utf-8"></script>
+
 	</head>
 	<body>
 
@@ -14,7 +14,11 @@
 		<br>
 		<div id="months" ></div>
 		<br>
+		<div id="days" ></div>
+		<br>
 		<div id="pie1" ></div>
+		<br>
+		<div id="time" ></div>
 
 <script>
 	window.onload = function(){
@@ -25,7 +29,7 @@
 			bindto: '#years',
 			data: {
 				x: 'x',
-				url: 'json/years-c3.json',
+				url: 'api/years',
 				mimeType: 'json'
 
 			},
@@ -44,12 +48,11 @@
 				type: 'area-spline',
 				x: 'x',
 				xFormat: '%m %Y', // 'xFormat' can be used as custom format of 'x'
-				url: 'json/months-c3.json',
+				url: 'api/months',
 				mimeType: 'json'
-
 			},
-			zoom: {
-				enabled: true
+			subchart: {
+				show: true
 			},
 			tooltip: {
 				grouped: false // Default true
@@ -58,6 +61,7 @@
 				x: {
 				  type: 'timeseries',
 				  tick: {
+						culling: false,
 				    format: '%m %Y'
 				  }
 				},
@@ -69,6 +73,7 @@
 				}
 			}
 		});
+
 		var pie1 = c3.generate({
 			tooltip: {
 				grouped: false // Default true
@@ -76,9 +81,29 @@
 			bindto: '#pie1',
 			data: {
 				x: 'x',
-				url: 'json/years-c3.json',
+				url: 'api/years',
 				mimeType: 'json',
 				type: 'pie'
+			}
+		});
+
+		var time = c3.generate({
+			bindto: '#time',
+			data: {
+				url: 'api/timeofday',
+				mimeType: 'json',
+				type: 'bar'
+			},
+			axis: {
+				x: {
+					culling: false
+				},
+				y: {
+					label: {
+						text: 'Messages Sent',
+						position: 'outer-middle'
+					}
+				}
 			}
 		});
 	};

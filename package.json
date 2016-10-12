@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bluebird": "^3.3.5",
+    "body-parser": "^1.14.2",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "express": "^4.13.4",
@@ -15,7 +16,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node ./index.js Hangouts.json",
-    "serve": "node ./serve.js",
+    "serve": "node lib/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
