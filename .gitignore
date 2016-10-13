@@ -42,3 +42,4 @@ lib/api/css
 *.sqlite3
 *.sqlite3-journal
 messages.htm
+.env
