@@ -27,7 +27,7 @@ if (program.args.length != 1) {
 
 var conversations;
 
-console.log('Parsing '+program.type+' file.');
+Logger.info('Parsing '+program.type+' file.');
 
 if (program.type === 'facebook') {
   conversations = facebookParser.parse(program.args[0]);
