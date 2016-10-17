@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My first Chartist Tests</title>
+    <link rel="stylesheet"
+          href="bower_components/chartist/dist/chartist.min.css">
+  </head>
+  <body>
+
+    <div id="timeofday" class="ct-chart ct-minor-seventh"></div>
+    <!-- Site content goes here !-->
+    <script src="bower_components/chartist/dist/chartist.min.js"></script>
+    <script>
+      var data = {
+        labels: ['12a','1a','2a','3a','4a','5a','6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p','10p','11p'],
+        series: [
+          [2610,2162,1071,499,496,240,382,891,3703,2950,3743,4138,3930,7479,7055,8148,7700,6717,7668,11186,13038,10984,8955,5141]
+        ]
+      };
+      var options = {};
+
+      new Chartist.Line('#timeofday', data, options);
+    </script>
+  </body>
+</html>
