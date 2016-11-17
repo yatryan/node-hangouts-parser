@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Days</title>
+		<link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/c3/c3.css" type="text/css">
+		<script src="bower_components/d3/d3.js" charset="utf-8"></script>
+		<script src="bower_components/c3/c3.js" charset="utf-8"></script>
+
+	</head>
+	<body>
+
+    <div id="days" ></div>
+
+<script>
+	window.onload = function(){
+		var months = c3.generate({
+			bindto: '#months',
+			data: {
+				type: 'area-spline',
+				x: 'x',
+				xFormat: '%m %Y', // 'xFormat' can be used as custom format of 'x'
+				url: 'api/months/10',
+				mimeType: 'json'
+			},
+			subchart: {
+				show: true
+			},
+			tooltip: {
+				grouped: false // Default true
+			},
+			legend: {
+				hide: true
+			},
+			axis: {
+				x: {
+				  type: 'timeseries',
+				  tick: {
+						culling: false,
+				    format: '%m %Y'
+				  }
+				},
+				y: {
+					label: {
+						text: 'Messages Sent',
+						position: 'outer-middle'
+					}
+				}
+			}
+		});
+	};
+	</script>
+	</body>
+</html>

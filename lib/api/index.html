@@ -22,6 +22,7 @@
 
 <script>
 	window.onload = function(){
+		/*
 		var years = c3.generate({
 			tooltip: {
 				grouped: false // Default true
@@ -29,7 +30,7 @@
 			bindto: '#years',
 			data: {
 				x: 'x',
-				url: 'api/years',
+				url: 'api/years/10',
 				mimeType: 'json'
 
 			},
@@ -45,13 +46,14 @@
 				}
 			}
 		});
+		*/
 		var months = c3.generate({
 			bindto: '#months',
 			data: {
 				type: 'area-spline',
 				x: 'x',
 				xFormat: '%m %Y', // 'xFormat' can be used as custom format of 'x'
-				url: 'api/months',
+				url: 'api/months/10',
 				mimeType: 'json'
 			},
 			subchart: {
@@ -79,7 +81,7 @@
 				}
 			}
 		});
-
+		/*
 		var pie1 = c3.generate({
 			tooltip: {
 				grouped: false // Default true
@@ -95,7 +97,8 @@
 				type: 'pie'
 			}
 		});
-
+		*/
+		/*
 		var time = c3.generate({
 			bindto: '#time',
 			data: {
@@ -115,6 +118,7 @@
 				}
 			}
 		});
+		*/
 	};
 	</script>
 	</body>
