@@ -15,12 +15,12 @@
 <script>
 	window.onload = function(){
 		var months = c3.generate({
-			bindto: '#months',
+			bindto: '#days',
 			data: {
 				type: 'area-spline',
 				x: 'x',
-				xFormat: '%m %Y', // 'xFormat' can be used as custom format of 'x'
-				url: 'api/months/10',
+				xFormat: '%m %d %Y', // 'xFormat' can be used as custom format of 'x'
+				url: 'api/days/10',
 				mimeType: 'json'
 			},
 			subchart: {
@@ -37,7 +37,7 @@
 				  type: 'timeseries',
 				  tick: {
 						culling: false,
-				    format: '%m %Y'
+				    format: '%m %d %Y'
 				  }
 				},
 				y: {

@@ -13,6 +13,8 @@ var Graph = require('./lib/graph');
 var hangoutParser = Hangouts.parser;
 var facebookParser = Facebook.parser;
 
+sqlite.init();
+
 program
   .version(config.version)
   .usage('[options] <file>')
@@ -46,4 +48,6 @@ sqlite.sendConversations(conversations, program.type)
   Logger.info('Wrote compiled to '+program.output);
 
   return 1;
+}).then(function() {
+  return sqlite.close();
 });
