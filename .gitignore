@@ -36,6 +36,7 @@ node_modules
 
 Hangouts.json
 output.json
+people.json
 lib/api/bower_components
 lib/api/json
 lib/api/css
