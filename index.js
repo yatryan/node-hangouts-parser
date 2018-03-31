@@ -20,7 +20,7 @@ program
   .usage('[options] <file>')
   .option('--sqlite [database]', 'Sqlite database','hangouts')
   .option('-o, --output [file]', 'Output to file', 'output.json')
-  .option('-t, --type [type]', 'Input file type (hangouts, facebook)', 'hangouts')
+  .option('-t, --type [type]', 'Input file type (hangouts, facebook, facebookv2)', 'hangouts')
   .parse(process.argv);
 
 if (program.args.length != 1) {
@@ -33,6 +33,8 @@ Logger.info('Parsing '+program.type+' file.');
 
 if (program.type === 'facebook') {
   conversations = facebookParser.parse(program.args[0]);
+} if (program.type === 'facebookv2') {
+  conversations = require(program.args[0]).threads;// facebookParser.parse(program.args[0]);
 } else {
   conversations = hangoutParser.parse(program.args[0]);
 }
