@@ -39,17 +39,13 @@ if (program.type === 'facebook') {
   conversations = hangoutParser.parse(program.args[0]);
 }
 
-sqlite.sendConversations(conversations, program.type)
-.then(function() {
-  return sqlite.loadMessages();
-})
-.then(function(messages) {
-  var compiled = Graph.compile(messages);
-  fs.writeFileSync(program.output,JSON.stringify(compiled, null, 2));
+sqlite.sendConversations(conversations, program.type);
 
-  Logger.info('Wrote compiled to '+program.output);
+var messages = sqlite.loadMessages();
 
-  return 1;
-}).then(function() {
-  return sqlite.close();
-});
+var compiled = Graph.compile(messages);
+fs.writeFileSync(program.output,JSON.stringify(compiled, null, 2));
+
+Logger.info('Wrote compiled to '+program.output);
+
+sqlite.close();
